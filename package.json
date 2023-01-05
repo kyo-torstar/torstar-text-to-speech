@@ -1,0 +1,14 @@
+{
+  "name": "torstar-text-to-speech",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "func start",
+    "test": "echo \"No tests yet...\""
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "azure-functions-core-tools": "^4.x",
+    "microsoft-cognitiveservices-speech-sdk": "^1.24.0"
+  }
+}
