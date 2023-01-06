@@ -4,11 +4,12 @@
   "description": "",
   "scripts": {
     "start": "func start",
-    "test": "echo \"No tests yet...\""
+    "test": "echo \"No tests yet...\"",
+    "upload":  "func azure functionapp publish torstar-text-to-speech"
   },
   "dependencies": {},
   "devDependencies": {
-    "azure-functions-core-tools": "^4.x",
+    "azure-storage": "^2.10.7",
     "microsoft-cognitiveservices-speech-sdk": "^1.24.0"
   }
 }
