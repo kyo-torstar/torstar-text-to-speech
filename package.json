@@ -5,7 +5,7 @@
   "scripts": {
     "start": "func start",
     "test": "echo \"No tests yet...\"",
-    "upload":  "func azure functionapp publish torstar-text-to-speech"
+    "upload":  "func azure functionapp publish"
   },
   "dependencies": {},
   "devDependencies": {
