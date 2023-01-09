@@ -34,7 +34,9 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
   // text to speech init
   const serviceRegion = 'eastus'
   const speechConfig = SpeechConfig.fromSubscription(TEXT_TO_SPEECH_API_KEY, serviceRegion)
-  let synthesizer = new SpeechSynthesizer(speechConfig)
+  // list of voices https://learn.microsoft.com/en-us/azure/cognitive-services/speech-service/language-support?tabs=stt-tts
+  speechConfig.speechSynthesisVoiceName = 'en-CA-LiamNeural'
+  const synthesizer = new SpeechSynthesizer(speechConfig)
 
   // process
   const startTime = new Date().getTime()
@@ -49,7 +51,7 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
 
         writableStream.end(Buffer.from(result.audioData), () => {
           synthesizer?.close()
-          synthesizer = undefined
+          // synthesizer = undefined
           const endTime = new Date().getTime() - startTime
           context.res = {
             body: {
@@ -66,7 +68,7 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
       function (err) {
         console.trace(`err - ${err.toString()}`)
         synthesizer.close()
-        synthesizer = undefined
+        // synthesizer = undefined
         context.res = {
           status: 400,
           body: `error: ${err.toString()}`
