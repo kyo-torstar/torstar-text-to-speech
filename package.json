@@ -3,13 +3,23 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "prestart": "npm run build",
+    "fix": "ts-standard --fix",
+    "prepare": "git config --local core.hooksPath .githooks",
     "start": "func start",
     "test": "echo \"No tests yet...\"",
-    "upload":  "func azure functionapp publish"
+    "upload": "func azure functionapp publish"
   },
   "dependencies": {},
   "devDependencies": {
+    "@azure/functions": "^3.0.0",
+    "@types/node": "16.x",
     "azure-storage": "^2.10.7",
-    "microsoft-cognitiveservices-speech-sdk": "^1.24.0"
+    "lint-staged": "^13.1.0",
+    "microsoft-cognitiveservices-speech-sdk": "^1.24.0",
+    "ts-standard": "^12.0.2",
+    "typescript": "^4.0.0"
   }
 }
