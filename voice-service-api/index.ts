@@ -16,16 +16,17 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
   // SECRETS
   const TEXT_TO_SPEECH_API_KEY = process.env.TEXT_TO_SPEECH_API_KEY ?? ''
   const AUDIO_BLOB_STORAGE_ENDPOINT = process.env.AUDIO_BLOB_STORAGE_ENDPOINT ?? ''
-  const BLOB_STORAGE_SAS_TOKEN = process.env.BLOB_STORAGE_SAS_TOKEN ?? ''
+  const BLOB_STORAGE_SAS_URL = process.env.BLOB_STORAGE_SAS_URL ?? ''
 
   // text to speech init
+  const speechSynthesisVoiceLang = config.speechSynthesisVoiceLang ?? 'en-CA'
   const speechSynthesisVoiceName = config.speechSynthesisVoiceName ?? 'en-CA-LiamNeural'
   const speechSynthesisVoiceGender = config.speechSynthesisVoiceGender ?? 'Male'
   const speechSynthesisOutputFormat = config.speechSynthesisOutputFormat ?? 'riff-24khz-16bit-mono-pcm'
 
   const startTime = new Date().getTime()
   try {
-    const requestSynthesisResult = await requestSynthesis(serviceRegion, TEXT_TO_SPEECH_API_KEY, BLOB_STORAGE_SAS_TOKEN, text, { speechSynthesisVoiceGender, speechSynthesisVoiceName, speechSynthesisOutputFormat })
+    const requestSynthesisResult = await requestSynthesis(serviceRegion, TEXT_TO_SPEECH_API_KEY, BLOB_STORAGE_SAS_URL, text, { speechSynthesisVoiceLang, speechSynthesisVoiceGender, speechSynthesisVoiceName, speechSynthesisOutputFormat })
     if (requestSynthesisResult.success) {
       const synthesisResult = await waitForSynthesisResult(requestSynthesisResult.data, serviceRegion, TEXT_TO_SPEECH_API_KEY)
 

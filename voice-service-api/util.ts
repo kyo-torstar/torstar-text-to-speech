@@ -36,7 +36,7 @@ export const waitForSynthesisResult = async (id: string, serviceRegion: string, 
   }
 }
 
-export const requestSynthesis = async (serviceRegion: string, apiKey: string, blobStorageSASToken: string, text: string, synthesisConfig: ISynthesisConfig): Promise<ApiResponse> => {
+export const requestSynthesis = async (serviceRegion: string, apiKey: string, blobStorageSASUrl: string, text: string, synthesisConfig: ISynthesisConfig): Promise<ApiResponse> => {
   const data = {
     displayName: 'torstar',
     description: 'torstar batch synthesis',
@@ -44,8 +44,8 @@ export const requestSynthesis = async (serviceRegion: string, apiKey: string, bl
     inputs: [
       {
         text: `
-          <speak version="1.0" xml:lang="en-CA">
-            <voice xml:lang="en-CA" xml:gender="${synthesisConfig.speechSynthesisVoiceGender}" name="${synthesisConfig.speechSynthesisVoiceName}">
+          <speak version="1.0" xml:lang="${synthesisConfig.speechSynthesisVoiceLang}">
+            <voice xml:lang="${synthesisConfig.speechSynthesisVoiceLang}" xml:gender="${synthesisConfig.speechSynthesisVoiceGender}" name="${synthesisConfig.speechSynthesisVoiceName}">
               ${text}
             </voice>
           </speak>
@@ -58,7 +58,7 @@ export const requestSynthesis = async (serviceRegion: string, apiKey: string, bl
       sentenceBoundaryEnabled: false,
       concatenateResult: false,
       decompressOutputFiles: true,
-      destinationContainerUrl: blobStorageSASToken
+      destinationContainerUrl: blobStorageSASUrl
     }
   }
 
