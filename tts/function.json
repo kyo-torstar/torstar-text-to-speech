@@ -16,5 +16,5 @@
       "name": "res"
     }
   ],
-  "scriptFile": "../dist/voice-service-api/index.js"
+  "scriptFile": "../dist/tts/index.js"
 }
