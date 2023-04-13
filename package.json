@@ -9,10 +9,13 @@
     "fix": "ts-standard --fix",
     "prepare": "git config --local core.hooksPath .githooks",
     "start": "func start",
+    "dev": "source env.sh && func start",
     "test": "echo \"No tests yet...\"",
     "upload": "func azure functionapp publish"
   },
-  "dependencies": {},
+  "dependencies": {
+    "mongoose": "^7.0.3"
+  },
   "devDependencies": {
     "@azure/functions": "^3.0.0",
     "@types/node": "16.x",
