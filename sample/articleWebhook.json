@@ -1,0 +1,25 @@
+{
+  "time": "2023-04-11T19:07:25+0000",
+  "application": "editorial",
+  "event": "article_update",
+  "data": {
+    "uuid": "c58740c9-98d8-5c0b-b0f1-0620fef192bc",
+    "url": "https://www.thespec.cms.us-corp-qa-4.vip.tnpreprod.net/news/canada/ceo-board-of-trudeau-foundation-resign-citing-recent-politicization-of-their-work/article_c58740c9-98d8-5c0b-b0f1-0620fef192bc.html",
+    "title": "CEO, board of Trudeau Foundation resign citing recent politicization of their work",
+    "type": "article",
+    "flags": [
+      "wire"
+    ],
+    "start_time": "2023-04-11T18:56:00+0000",
+    "revision": 5,
+    "published": true,
+    "access": "default",
+    "workflow": {
+      "id": "",
+      "name": ""
+    },
+    "comment": null,
+    "email": "kyochan@torstar.ca",
+    "delete_time": "2023-04-25T19:00:00+0000"
+  }
+}

@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
-import { ISynthesisConfig } from './types'
+import config from '../config'
 
 interface ApiResponse {
   success: boolean
@@ -72,7 +72,7 @@ export const requestSynthesis = async (serviceRegion: string, apiKey: string, bl
     }
   )
 
-  if (result.data.id?.trim() !== '') {
+  if (typeof result.data.id !== 'undefined') {
     return {
       success: true,
       data: result.data.id
@@ -82,5 +82,49 @@ export const requestSynthesis = async (serviceRegion: string, apiKey: string, bl
       success: false,
       data: 'missing id'
     }
+  }
+}
+
+export const processTtsRequest = async (text = ''): Promise<any> => {
+  const serviceRegion = config.speechSynthesisVoiceRegion
+
+  if (text === '') {
+    throw Error('no content')
+  }
+
+  // test only start
+  // if (config.env === 'local') {
+  //   return {
+  //     stats: {
+  //       processTimeInSeconds: 5,
+  //       numOfCharacters: text.length
+  //     },
+  //     audioFile: `0001.wav`
+  //   }
+  //
+  //   throw Error('no content')
+  // }
+  // test only ends
+
+  const startTime = new Date().getTime()
+  const requestSynthesisResult = await requestSynthesis(serviceRegion, config.ttsAPIKey, config.ttsBlobStorageSASUrl, text, config)
+  if (requestSynthesisResult.success) {
+    const synthesisResult = await waitForSynthesisResult(requestSynthesisResult.data, serviceRegion, config.ttsAPIKey)
+
+    if (synthesisResult?.success) {
+      console.log('synthesisResult', synthesisResult)
+      const endTime = new Date().getTime() - startTime
+      return {
+        stats: {
+          processTimeInSeconds: Math.ceil(endTime / 1000),
+          numOfCharacters: text.length
+        },
+        audioFile: `${config.ttsBlobStorageEndpoint}/${synthesisResult.data}/0001.wav`
+      }
+    } else {
+      throw Error(`error: waitForSynthesisResult ${synthesisResult.data?.toString()}`)
+    }
+  } else {
+    throw Error(`error: requestSynthesis ${requestSynthesisResult.data?.toString()}`)
   }
 }

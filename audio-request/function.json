@@ -1,13 +1,13 @@
 {
   "bindings": [
     {
-      "authLevel": "function",
+      "authLevel": "anonymous",
       "type": "httpTrigger",
       "direction": "in",
-      "name": "req",
+      "name": "audioRequest",
+      "route": "audio/articles/{articleId}",
       "methods": [
-        "get",
-        "post"
+        "get"
       ]
     },
     {
@@ -16,5 +16,5 @@
       "name": "res"
     }
   ],
-  "scriptFile": "../dist/tts/index.js"
+  "scriptFile": "../dist/audio-request/index.js"
 }
